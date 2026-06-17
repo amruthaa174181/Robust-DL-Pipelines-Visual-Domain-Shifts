@@ -71,6 +71,8 @@ def run_experiment(use_defense=False, epochs=5):
     print(f"Accuracy on Clean Test Images (Source Domain): {clean_acc:.2f}%")
     print(f"Accuracy on Corrupted Test Images (Target Domain): {corrupt_acc:.2f}%")
     print(f"Quantified Domain Gap: {clean_acc - corrupt_acc:.2f}%")
+    if use_defense:
+        torch.save(model, "robust_resnet18.pt")
 
 if __name__ == '__main__':
     # Experiment A: Baseline training (No defenses against noise)
@@ -78,3 +80,4 @@ if __name__ == '__main__':
     
     # Experiment B: Strategic training (With our Data Augmentation Pipeline defense enabled)
     run_experiment(use_defense=True, epochs=5)
+    
